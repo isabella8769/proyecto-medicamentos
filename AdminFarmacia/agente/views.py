@@ -7,5 +7,13 @@ def inicio(request):
 
 def lista_agentes(request):
     agentes = Agente.objects.all()
-    return render(request, 'pagina_base/lista_agentes.html', {'agentes': agentes})
+    return render(request, 'lista_agentes.html', {'agentes': agentes})
 
+def alta_agentes(request):
+    pass
+
+def eliminacion_agentes(request, id_agente):
+    pass
+
+def modificaciones_agentes(request, id_agente):
+    pass

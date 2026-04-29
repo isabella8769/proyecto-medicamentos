@@ -1,0 +1,31 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Lista de Agentes {% endblock titulo %}
+{% block contenido %}
+    <h1>Lista de Agentes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>DNI</th>
+                <th>Nombre y Apellido</th>
+                <th>Contacto</th>
+                <th>Especialidad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agente in agentes %}
+            <tr>
+                <td>{{ agente.id_agente }}</td>
+                <td>{{ agente.dni }}</td>
+                <td>{{ agente.nombre_apellido }}</td>
+                <td>{{ agente.contacto }}</td>
+                <td>{{ agente.id_especialidad }}</td>
+                <td>{{ agente.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
+

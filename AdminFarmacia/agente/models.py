@@ -10,7 +10,7 @@ class Especialidad(models.Model):
 # Create your models here.
 class Agente(models.Model):
     id_agente = models.AutoField(primary_key=True)
-    dni=models.IntegerField(unique=True, max_length=12)
+    dni=models.IntegerField(unique=True)
     nombre_apellido = models.CharField(max_length=100)
     contacto = models.CharField(max_length=100)
     id_especialidad = models.ForeignKey('Especialidad', on_delete=models.CASCADE)

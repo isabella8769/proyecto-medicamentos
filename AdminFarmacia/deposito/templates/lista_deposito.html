@@ -1,0 +1,48 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Lista de Depósitos {% endblock titulo %}
+{% block contenido %}
+<div class="container mt-4 bg-white text-white p-4 rounded">
+    <h1>Lista de Depósitos</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código deposito</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deposito in depositos %}
+            <tr>
+                <td>{{ deposito.id_deposito }}</td>
+                <td>{{ deposito.descripcion }}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+   
+    
+    <td>
+        <button
+            type="button"
+            class="btn btn-outline-primary"  href="eliminacion_deposito/{{ x.id }}"
+        >
+            Eliminar
+        </button>
+        
+       <button
+        type="button"
+        class="btn btn-outline-primary" href="modificaciones_deposito/{{ x.id }}"
+       >Modificar Depósito  
+       
+       </button>
+       
+        
+    </td>
+     </table>
+
+   <button class="btn btn-primary" href="#" role="{% url 'alta_deposito' %}" >Agregar Depósito</button>
+
+
+</div>
+{% endblock contenido %}

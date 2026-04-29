@@ -1,0 +1,25 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Lista de Huecos {% endblock titulo %}
+{% block contenido %}
+    <h1>Lista de Huecos</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Supervisor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hueco in huecos %}
+            <tr>
+                <td>{{ hueco.id_hueco }}</td>
+                <td>{{ hueco.descripcion }}</td>
+                <td>{{ hueco.id_supervisor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
+

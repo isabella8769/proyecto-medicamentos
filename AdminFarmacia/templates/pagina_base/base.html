@@ -1,4 +1,5 @@
 {% load static %}
+
 <!Doctype html>
 <html lang="en">
   <head>
@@ -20,7 +21,7 @@
 </style>
 
   </head>
-  <body class="bg-success p-2 text-white">
+  <body class="bg-primary p-2 text-white">
    
     <!-- Modal para ingresar la clave -->
     <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
@@ -60,25 +61,25 @@
               </li>
               <!-- Enlaces protegidos -->
               <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'listaCuota' %}" data-protected="true">Cuotas Jugadores</a>
+                <a class="nav-link protected-link" href="{% url 'lista_deposito' %}" data-protected="true">Depositos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'listaSocioCuota' %}" data-protected="true">Cuotas Socios</a>
+                <a class="nav-link protected-link" href="{% url 'lista_agentes' %}" data-protected="true">Agentes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'lista' %}" data-protected="true">Agentes</a>
+                <a class="nav-link protected-link" href="{% url 'lista_hueco' %}" data-protected="true">Hueco</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Socios</a>
+                <a class="nav-link protected-link" href="" data-protected="true">Medicamentos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Eventos</a>
+                <a class="nav-link protected-link" href="" data-protected="true">Descartables</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Contratación</a>
+                <a class="nav-link protected-link" href="" data-protected="true">Laboratorio</a>
               </li>
                <li class="nav-item">
-              <a class="nav-link protected-link" href="" data-protected="true">Servicio</a>
+              <a class="nav-link protected-link" href="" data-protected="true">Registro Medicamento</a>
               </li>
              {% comment %}<li class="nav-item">
                 <a class="nav-link protected-link" href="" data-protected="true">
@@ -86,7 +87,7 @@
                 </a>
               </li>{% endcomment %}
               <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Deporte
+                <a class="nav-link protected-link" href="" data-protected="true">
                 </a>
               </li>
 

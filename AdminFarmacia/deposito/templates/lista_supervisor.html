@@ -1,0 +1,26 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+
+{% block titulo %}Lista de Supervisores {% endblock titulo %}
+{% block contenido %}
+    <h1>Lista de Supervisores</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre y Apellido</th>
+                <th>Contacto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supervisor in supervisores %}
+            <tr>
+                <td>{{ supervisor.id }}</td>
+                <td>{{ supervisor.nombre_apellido }}</td>
+                <td>{{ supervisor.contacto }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
+
