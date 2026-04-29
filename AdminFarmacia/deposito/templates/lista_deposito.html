@@ -7,42 +7,29 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Código deposito</th>
+                <th>Código depósito</th>
                 <th>Nombre</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for deposito in depositos %}
             <tr>
-                <td>{{ deposito.id_deposito }}</td>
+                <td>{{ deposito.id }}</td>
                 <td>{{ deposito.descripcion }}</td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{% url 'eliminacion_deposito' deposito.id_deposito %}">
+                        Eliminar
+                    </a>
+                    <a class="btn btn-outline-primary" href="{% url 'modificaciones_deposito' deposito.id_deposito %}">
+                        Modificar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
-            
         </tbody>
-   
-    
-    <td>
-        <button
-            type="button"
-            class="btn btn-outline-primary"  href="eliminacion_deposito/{{ x.id }}"
-        >
-            Eliminar
-        </button>
-        
-       <button
-        type="button"
-        class="btn btn-outline-primary" href="modificaciones_deposito/{{ x.id }}"
-       >Modificar Depósito  
-       
-       </button>
-       
-        
-    </td>
-     </table>
+    </table>
 
-   <button class="btn btn-primary" href="#" role="{% url 'alta_deposito' %}" >Agregar Depósito</button>
-
-
+    <a class="btn btn-primary" href="{% url 'alta_deposito' %}">Agregar Depósito</a>
 </div>
 {% endblock contenido %}

@@ -20,19 +20,25 @@ def inicio(request):
 
 # funciones para deposito
 def lista_deposito(request):
-     deposito = Deposito.objects.all().values()
-     template = loader.get_template('lista_deposito.html')
-     context = {
-     'deposito': deposito,
-    }
-     return HttpResponse(template.render(context, request))
+    Deposito
+
+def lista_deposito(request):
+    depositos = Deposito.objects.all()
+    return render(request, 'lista_deposito.html', {'depositos': depositos})
+
 
 def alta_deposito(request):
     if request.method == 'POST':
-        deposito = Deposito(descripcion=request.POST['descripcion'])
-        deposito.save()
-        return redirect('lista_deposito')
-    return render(request, 'lista_deposito.html')
+        descripcion = request.POST.get('descripcion')
+        if descripcion:  # Validación básica
+            deposito = Deposito(descripcion=descripcion)
+            deposito.save()
+        return redirect('lista_deposito')  # Redirige a la vista que lista depósitos
+    
+    # Si es GET, mostramos la lista de depósitos
+    depositos = Deposito.objects.all()
+    return render(request, 'alta_deposito.html', {'depositos': depositos})
+
 
 def eliminacion_deposito(request, id_deposito):
     pass
