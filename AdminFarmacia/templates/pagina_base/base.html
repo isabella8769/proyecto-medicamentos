@@ -1,181 +1,59 @@
 {% load static %}
-
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>{% block titulo %}{% endblock titulo %}</title>
-   
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 
-    <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <style>
-/* filepath: tu_archivo.css o dentro de una etiqueta <style> */
-.img-fade:hover {
-    opacity: 0.7;         /* Hace la imagen más transparente */
-    filter: blur(2px);    /* Aplica un desenfoque suave */
-}
-</style>
-
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
   </head>
-  <body class="bg-primary p-2 text-white">
-   
-    <!-- Modal para ingresar la clave -->
-    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="passwordModalLabel">Ingrese la clave</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="passwordInput" class="form-label">Clave de acceso:</label>
-              <input type="password" class="form-control" id="passwordInput" placeholder="Ingrese su clave">
-              <div id="errorMsg" class="text-danger mt-2" style="display: none;">Clave incorrecta. Intente nuevamente.</div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="passwordSubmit">Acceder</button>
-          </div>
+  <body>
+    <!-- Menu (solo 3 opciones) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+
+        {% if request.session.portal_user %}
+
+          <span class="navbar-text me-3">
+            {{ request.session.portal_user.nombre_apellido }} ({{ request.session.portal_user.cargo }})
+          </span>
+          <a class="btn btn-outline-dark btn-sm" href="{% url 'inicio' %}?salir=1">Salir</a>
+        {% endif %}
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'inventario:lista_medicamentos' %}">Medicamentos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'lista_agentes' %}">Agentes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'inventario:ver_stock' %}">Laboratorio</a>
+            </li>
+          </ul>
         </div>
       </div>
+    </nav>
+
+
+    <!-- Contenido -->
+    <div class="container mt-4">
+      {% block contenido %}{% endblock contenido %}
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p>© 2026 Farmacia Hospital Aurelio Crespo</p>
+    </footer>
 
-    <!-- Menu de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Farmacia Hospital Aurelio Crespo</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
-              </li>
-              <!-- Enlaces protegidos -->
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'lista_deposito' %}" data-protected="true">Depositos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'lista_agentes' %}" data-protected="true">Agentes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="{% url 'lista_hueco' %}" data-protected="true">Hueco</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Medicamentos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Descartables</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">Laboratorio</a>
-              </li>
-               <li class="nav-item">
-              <a class="nav-link protected-link" href="" data-protected="true">Registro Medicamento</a>
-              </li>
-             {% comment %}<li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">
-                  Nosotros
-                </a>
-              </li>{% endcomment %}
-              <li class="nav-item">
-                <a class="nav-link protected-link" href="" data-protected="true">
-                </a>
-              </li>
-
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-
-      <div class="container">
-        <div class="row">
-            <div class="col-12">
-              <br>
-                {% block contenido %}{% endblock contenido %}
-            </div>
-        </div>
-      </div>
-
-
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-
-    <!-- JavaScript para el manejo de clave -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const correctPassword = '1';  // Cambia la clave aquí si es necesario
-    const passwordInput = document.getElementById('passwordInput');
-    const passwordSubmit = document.getElementById('passwordSubmit');
-    const errorMsg = document.getElementById('errorMsg');
-    let pendingHref = null;
-
-    function intentarAcceso() {
-      if (passwordInput.value === correctPassword) {
-        errorMsg.style.display = 'none';
-        const modal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
-        modal.hide();
-        if (pendingHref) {
-          window.location.href = pendingHref;
-        }
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    }
-
-    // Al hacer clic en el botón de acceso
-    passwordSubmit.addEventListener('click', intentarAcceso);
-
-    // Permitir acceso con Enter en el input
-    passwordInput.addEventListener('keydown', function(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        intentarAcceso();
-      }
-    });
-
-    // Mostrar el modal al intentar acceder a enlaces protegidos
-    document.querySelectorAll('.protected-link').forEach(link => {
-      link.addEventListener('click', function (event) {
-        event.preventDefault();  // Siempre evita que el enlace se active
-        pendingHref = link.href; // Guarda el destino
-        passwordInput.value = ""; // Limpia el input
-        errorMsg.style.display = 'none'; // Oculta error anterior
-        const modal = new bootstrap.Modal(document.getElementById('passwordModal'));
-        modal.show();  // Muestra el modal
-      });
-    });
-
-    // Asegurar que el menú de navegación se despliegue en dispositivos móviles
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbarCollapse = document.querySelector('#navbarSupportedContent');
-    if (navbarToggler && navbarCollapse) {
-      navbarToggler.addEventListener('click', function() {
-        navbarCollapse.classList.toggle('show');
-      });
-      // Cerrar el menú al hacer clic en un enlace
-      document.querySelectorAll('#navbarSupportedContent .nav-link').forEach(link => {
-        link.addEventListener('click', function() {
-          navbarCollapse.classList.remove('show');
-        });
-      });
-    }
-  });
-</script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -1,14 +1,14 @@
-# TODO: Fix alta_deposito - ACTUALIZADO ✅
+# TODO
 
-## Cambios:
-1. ✅ Template lista_deposito.html: Enlace corregido `{% url 'alta_deposito' %}` 
-2. ✅ View alta_deposito: GET renderiza alta_deposito.html, POST guarda y redirige
+- [x] Agregar barra de búsqueda (GET) en `lista_medicamentos.html` para filtrar por `q`.
 
-## Prueba:
-- /lista_deposito/ → click Agregar → /alta_deposito/ (form)
-- Submit → nuevo depósito en lista
+- [x] Actualizar vista `lista_medicamentos` para filtrar con `Q` en `nombre`, `lote`, `proveedor`, `estado`, `fecha_vencimiento` y `cantidad` (contiene en string).
 
-**Nota:** El log muestra user aún clickea /lista_deposito/alta_deposito/ - con enlace {% url %} irá a /alta_deposito/ correcto. Recarga servidor para ver cambios en template.
+- [x] Pasar `q` a la plantilla y mantener orden por `fecha_vencimiento`.
 
-Comando servidor Windows: `cd AdminFarmacia` enter, luego `python manage.py runserver`
+- [x] Modificar `base.html` para eliminar el contenido de la barra superior izquierdo (marca/elementos que no aportan) conservando el menú centrado.
+
+- [x] Probar manualmente: buscar por texto, por número (cantidad) y por fecha.
+
+
 

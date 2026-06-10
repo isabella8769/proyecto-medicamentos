@@ -1,0 +1,26 @@
+{% extends 'pagina_base/base.html' %}
+
+{% block titulo %}Eliminar Medicamento{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2>Eliminar Medicamento</h2>
+
+    <p>¿Está seguro que desea eliminar el siguiente medicamento?</p>
+
+    <ul>
+        <li><strong>Nombre:</strong> {{ medicamento.nombre }}</li>
+        <li><strong>Lote:</strong> {{ medicamento.lote }}</li>
+        <li><strong>Fecha de vencimiento:</strong> {{ medicamento.fecha_vencimiento }}</li>
+        <li><strong>Cantidad:</strong> {{ medicamento.cantidad }}</li>
+        <li><strong>Proveedor:</strong> {{ medicamento.proveedor }}</li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'inventario:detalle_medicamento' medicamento.pk %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>
+{% endblock %}
+

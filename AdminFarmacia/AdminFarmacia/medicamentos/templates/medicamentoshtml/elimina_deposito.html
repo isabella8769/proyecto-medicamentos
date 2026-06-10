@@ -1,0 +1,19 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Eliminar Depósito {% endblock titulo %}
+{% block contenido %}
+<div class="container mt-4 bg-danger text-white p-4 rounded">
+    <h1>Eliminar Depósito</h1>
+    <p>¿Está seguro que desea eliminar el siguiente depósito?</p>
+    <ul>
+        <li><strong>Código:</strong> {{ deposito.id_deposito }}</li>
+        <li><strong>Descripción:</strong> {{ deposito.descripcion }}</li>
+    </ul>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark">Confirmar Eliminación</button>
+        <a class="btn btn-outline-dark" href="{% url 'lista_deposito' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock contenido %}

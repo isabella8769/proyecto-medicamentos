@@ -1,30 +1,58 @@
 {% extends 'pagina_base/base.html' %}
 {% load static %}
 
+{% block titulo %}Página de Inicio{% endblock titulo %}
 
-{% block titulo %}Página de Inicio {% endblock titulo %}
 {% block contenido %}
-    <div class="p-5 mb-4 bg-dark rounded-3 text-white">
-        <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Bienvenido al Sistema </h1>
-        <p class="col-md-8 fs-4">Este es el sistema de administración de Stock de farmacia</p>
-     
-      
-         <!--     <a><img src="{% static 'logot.png' %}" alt="logo" class="rounded mx-auto d-block h-50 bd-placeholder-img" width="200" height="250" > </a>-->
-        <!-- Imagen con transición de escala al pasar el mouse -->
-       <img src="{% static 'frenteHospi.jpg' %}" 
-        alt="logo" width="200" height="200" 
-        loading="lazy"
-        class="img-transicion rounded mx-auto d-block h-30" 
-        style="transition: transform 0.5s;">
+  <div class="bg-dark text-white p-5 rounded">
+    <div class="container">
+      <h1 class="display-4">Ingreso al Portal</h1>
+      <p class="lead mb-4">Este es el sistema de administración de Stock de farmacia</p>
 
-<style>
-/* filepath: tu_archivo.css o dentro de una etiqueta <style> */
-.img-transicion:hover {
-    transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
-}
-</style>
+      <div class="card text-dark shadow-sm">
+        <div class="card-body">
+          <form method="post" action="{% url 'login_portal' %}">
+            {% csrf_token %}
+
+            {% if error %}
+              <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endif %}
+
+            <div class="mb-3">
+              <label class="form-label">Nombre y Apellido</label>
+              <input class="form-control" name="nombre_apellido" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">DNI</label>
+              <input class="form-control" name="dni" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Cargo</label>
+              <input class="form-control" name="cargo" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Contraseña</label>
+              <input type="password" class="form-control" name="password" required>
+              <div class="form-text">Contraseña fija por defecto: <b>admin123</b></div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+          </form>
         </div>
-
+      </div>
     </div>
+  </div>
+
+
+  <!-- Imagen destacada -->
+  <div class="text-center mt-4">
+    <img src="{% static 'frenteHospi.jpg' %}" 
+         alt="Hospital" 
+         class="img-fluid rounded shadow-lg img-transicion" 
+         style="max-width: 250px; transition: transform 0.5s;">
+  </div>
 {% endblock contenido %}

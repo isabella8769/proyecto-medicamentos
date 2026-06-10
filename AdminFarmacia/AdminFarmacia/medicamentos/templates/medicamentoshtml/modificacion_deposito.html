@@ -1,0 +1,17 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Modificar Depósito {% endblock titulo %}
+{% block contenido %}
+<div class="container mt-4 bg-warning text-dark p-4 rounded">
+    <h1>Modificar Depósito</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ deposito.descripcion }}" required>
+        </div>
+        <button type="submit" class="btn btn-dark">Guardar Cambios</button>
+        <a class="btn btn-outline-dark" href="{% url 'lista_deposito' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock contenido %}

@@ -1,0 +1,19 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Alta de Depósito {% endblock titulo %}
+{% block contenido %}
+<div class="container mt-4 bg-primary text-white p-4 rounded">
+    <h1>Alta de Depósito</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+        </div>
+         <button><a href="/deposito/lista_deposito">volver</a></button>
+
+
+
+    </form>
+</div>
+{% endblock contenido %}

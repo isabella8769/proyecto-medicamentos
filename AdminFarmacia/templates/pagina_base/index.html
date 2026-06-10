@@ -1,0 +1,43 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+
+{% block titulo %}Panel Principal{% endblock titulo %}
+
+{% block contenido %}
+  <!-- Sección de tarjetas -->
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Medicamentos</h5>
+          <p class="card-text">Gestión de stock y control de vencimientos.</p>
+          <a href="{% url 'inventario:lista_medicamentos' %}" class="btn btn-outline-primary">Ver más</a>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Agentes</h5>
+          <p class="card-text">Registro y administración de personal.</p>
+          <a href="{% url 'lista_agentes' %}" class="btn btn-outline-success">Ver más</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Laboratorio</h5>
+          <p class="card-text">Control de insumos y descartables.</p>
+          <a href="{% url 'inventario:ver_stock' %}" class="btn btn-outline-danger">Ver más</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock contenido %}
+
+ 

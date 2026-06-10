@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'agente',
     'deposito',
+    'AdminFarmacia.medicamentos.apps.MedicamentosConfig',
 ]
 
 MIDDLEWARE = [

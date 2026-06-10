@@ -1,0 +1,83 @@
+{% extends 'pagina_base/base.html' %}
+{% block titulo %}Lista de Medicamentos{% endblock titulo %}
+
+{% block contenido %}
+<div class="container mt-4">
+
+    <h2 style="color:red;">PRUEBA LISTA MEDICAMENTOS</h2>
+
+    <form method="get" class="mb-3">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-8">
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="Buscar medicamento (nombre, lote, proveedor, estado, fecha o cantidad)..."
+                    value="{{ q|default:'' }}"
+                >
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                    <a href="{% url 'inventario:lista_medicamentos' %}" class="btn btn-outline-secondary">Limpiar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <a href="{% url 'inventario:crear_medicamento' %}" class="btn btn-success mb-3">
+        + Nuevo Medicamento
+    </a>
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Lote</th>
+                <th>Fecha Vencimiento</th>
+                <th>Cantidad</th>
+                <th>Proveedor</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for medicamento in medicamentos %}
+            <tr>
+                <td>{{ medicamento.pk }}</td>
+                <td>{{ medicamento.nombre }}</td>
+                <td>{{ medicamento.lote }}</td>
+                <td>{{ medicamento.fecha_vencimiento }}</td>
+                <td>{{ medicamento.cantidad }}</td>
+                <td>{{ medicamento.proveedor }}</td>
+                <td>{{ medicamento.estado }}</td>
+
+                <td>
+                    <a href="{% url 'inventario:detalle_medicamento' medicamento.pk %}">
+                        VER
+                    </a>
+
+                    <br>
+
+                    <small>
+                        URL:
+                        {% url 'inventario:detalle_medicamento' medicamento.pk %}
+                    </small>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">
+                    No hay medicamentos registrados.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock contenido %}
